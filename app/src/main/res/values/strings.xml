@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MinhasFinancas</string>
+    <string name="mensagem_apresentacao_app">Junte-se a um novo modo para ter   suas finanças em suas mãos</string>
+    <string name="crie_conta">Crie sua conta grátis</string>
+</resources>

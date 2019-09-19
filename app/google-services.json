@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1089038120091",
+    "firebase_url": "https://minhasfinancas-1861d.firebaseio.com",
+    "project_id": "minhasfinancas-1861d",
+    "storage_bucket": "minhasfinancas-1861d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089038120091:android:f4bdf3bdd03a701920423e",
+        "android_client_info": {
+          "package_name": "br.edu.ifspsaocarlos.minhasfinancas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089038120091-ss3cas86lhk9uh7vutiv4p4vi0jfj8gq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ifspsaocarlos.minhasfinancas",
+            "certificate_hash": "131fb2e96e670e8bad0c8cb501b11c18e695d5c6"
+          }
+        },
+        {
+          "client_id": "1089038120091-nl8p1h34lvvgor216bplce4057u16eqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgUw2kLQHS9q-GuF51RpumcuImot08E6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089038120091-nl8p1h34lvvgor216bplce4057u16eqr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
