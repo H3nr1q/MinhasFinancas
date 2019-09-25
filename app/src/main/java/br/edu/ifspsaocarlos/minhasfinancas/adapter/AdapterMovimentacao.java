@@ -1,6 +1,7 @@
 package br.edu.ifspsaocarlos.minhasfinancas.adapter;
 
 import android.content.Context;
+import android.net.sip.SipSession;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,18 @@ import br.edu.ifspsaocarlos.minhasfinancas.R;
 import br.edu.ifspsaocarlos.minhasfinancas.model.Movimentacao;
 
 public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentacao.MyViewHolder> {
+    public interface MovimentacaoListener{
+        void onClick (Movimentacao movimentacao);
+    }
+    MovimentacaoListener listener;
 
     List<Movimentacao> movimentacoes;
     Context context;
 
-    public AdapterMovimentacao(List<Movimentacao> movimentacoes, Context context) {
+    public AdapterMovimentacao(List<Movimentacao> movimentacoes, Context context, MovimentacaoListener listener) {
         this.movimentacoes = movimentacoes;
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentaca
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Movimentacao movimentacao = movimentacoes.get(position);
+        final Movimentacao movimentacao = movimentacoes.get(position);
 
         holder.titulo.setText(movimentacao.getDescricao());
         holder.valor.setText(String.valueOf(movimentacao.getValor()));
@@ -43,6 +49,13 @@ public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentaca
             holder.valor.setTextColor(context.getResources().getColor(R.color.colorAccent));
             holder.valor.setText("-" + movimentacao.getValor());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClick(movimentacao);
+            }
+        });
     }
 
 

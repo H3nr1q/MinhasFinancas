@@ -1,5 +1,8 @@
 package br.edu.ifspsaocarlos.minhasfinancas.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -7,7 +10,7 @@ import br.edu.ifspsaocarlos.minhasfinancas.config.ConfiguracaoFirebase;
 import br.edu.ifspsaocarlos.minhasfinancas.helper.Base64Custom;
 import br.edu.ifspsaocarlos.minhasfinancas.helper.DateCustom;
 
-public class Movimentacao {
+public class Movimentacao implements Parcelable {
 
     private String data;
     private String categoria;
@@ -18,6 +21,27 @@ public class Movimentacao {
 
     public Movimentacao() {
     }
+
+    protected Movimentacao(Parcel in) {
+        data = in.readString();
+        categoria = in.readString();
+        descricao = in.readString();
+        tipo = in.readString();
+        valor = in.readDouble();
+        key = in.readString();
+    }
+
+    public static final Creator<Movimentacao> CREATOR = new Creator<Movimentacao>() {
+        @Override
+        public Movimentacao createFromParcel(Parcel in) {
+            return new Movimentacao(in);
+        }
+
+        @Override
+        public Movimentacao[] newArray(int size) {
+            return new Movimentacao[size];
+        }
+    };
 
     public void salvar(String dataEscolhida){
 
@@ -31,7 +55,6 @@ public class Movimentacao {
                 .child( mesAno )
                 .push()
                 .setValue(this);
-
     }
 
     public String getKey() {
@@ -80,6 +103,25 @@ public class Movimentacao {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public boolean isDespesa(){
+        return tipo.equals("d");
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(data);
+        parcel.writeString(categoria);
+        parcel.writeString(descricao);
+        parcel.writeString(tipo);
+        parcel.writeDouble(valor);
+        parcel.writeString(key);
     }
 }
 

@@ -44,7 +44,17 @@ public class DespesasActivity extends AppCompatActivity {
         campoData.setText( DateCustom.dataAtual() );
         recuperarDespesaTotal();
 
+        Movimentacao m = getIntent().getParcelableExtra("tag");
+        if(m != null) {
+            campoValor.setText(String.valueOf(m.getValor()));
+            campoData.setText(m.getData());
+            campoCategoria.setText(m.getCategoria());
+            campoDescricao.setText(m.getDescricao());
+        }
+
     }
+
+
 
     public void salvarDespesa(View view){
 

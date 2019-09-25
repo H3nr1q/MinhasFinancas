@@ -39,7 +39,7 @@ import br.edu.ifspsaocarlos.minhasfinancas.helper.Base64Custom;
 import br.edu.ifspsaocarlos.minhasfinancas.model.Movimentacao;
 import br.edu.ifspsaocarlos.minhasfinancas.model.Usuario;
 
-public class PrincipalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity implements AdapterMovimentacao.MovimentacaoListener {
     private MaterialCalendarView calendarView;
     private TextView textoSaudacao, textoSaldo;
     private Double despesaTotal = 0.0;
@@ -75,7 +75,7 @@ public class PrincipalActivity extends AppCompatActivity {
         swipe();
 
         //Configurar adapter
-        adapterMovimentacao = new AdapterMovimentacao(movimentacoes,this);
+        adapterMovimentacao = new AdapterMovimentacao(movimentacoes,this, this);
 
         //Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -299,5 +299,13 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onStop();
         usuarioRef.removeEventListener( valueEventListenerUsuario );
         movimentacaoRef.removeEventListener( valueEventListenerMovimentacoes );
+    }
+
+    @Override
+    public void onClick(Movimentacao movimentacao) {
+        Intent intent = new Intent(this, (movimentacao.isDespesa())? DespesasActivity.class:ReceitasActivity.class);
+        intent.putExtra("tag", movimentacao);
+        startActivity(intent);
+
     }
 }
