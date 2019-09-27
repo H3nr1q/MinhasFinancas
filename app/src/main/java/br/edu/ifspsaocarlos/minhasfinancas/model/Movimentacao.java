@@ -50,11 +50,17 @@ public class Movimentacao implements Parcelable {
         String mesAno = DateCustom.mesAnoDataEscolhida( dataEscolhida );
 
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
-        firebase.child("movimentacao")
+        firebase= firebase.child("movimentacao")
                 .child( idUsuario )
-                .child( mesAno )
-                .push()
-                .setValue(this);
+                .child( mesAno );
+
+        if(key != null && !key.isEmpty()){
+            firebase.child(key).setValue(this);
+        }
+        else{
+            firebase.push().setValue(this);
+        }
+
     }
 
     public String getKey() {
