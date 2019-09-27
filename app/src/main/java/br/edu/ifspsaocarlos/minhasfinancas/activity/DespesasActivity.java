@@ -44,6 +44,8 @@ public class DespesasActivity extends AppCompatActivity {
         campoData.setText( DateCustom.dataAtual() );
         recuperarDespesaTotal();
 
+        //recuperando dados da movimentação
+
         movimentacao = getIntent().getParcelableExtra("tag");
         if(movimentacao != null) {
             campoValor.setText(String.valueOf(movimentacao.getValor()));
@@ -62,6 +64,9 @@ public class DespesasActivity extends AppCompatActivity {
 
             if(movimentacao == null)
                 movimentacao = new Movimentacao();
+            else{
+                removeValorAntigo();
+            }
 
             String data = campoData.getText().toString();
             Double valorRecuperado = Double.parseDouble(campoValor.getText().toString());
@@ -82,6 +87,10 @@ public class DespesasActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private void removeValorAntigo() {
+        despesaTotal = despesaTotal - movimentacao.getValor();
     }
 
     public Boolean validarCamposDespesa(){

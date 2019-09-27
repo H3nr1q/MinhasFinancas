@@ -44,13 +44,27 @@ public class ReceitasActivity extends AppCompatActivity {
         campoData.setText( DateCustom.dataAtual() );
         recuperarReceitaTotal();
 
+        movimentacao = getIntent().getParcelableExtra("tag");
+        if (movimentacao != null){
+            campoValor.setText(String.valueOf(movimentacao.getValor()));
+            campoData.setText(movimentacao.getData());
+            campoCategoria.setText(movimentacao.getCategoria());
+            campoDescricao.setText(movimentacao.getDescricao());
+        }
+
     }
+
 
     public void salvarReceita(View view){
 
         if ( validarCamposReceita() ){
 
-            movimentacao = new Movimentacao();
+            if(movimentacao == null)
+                movimentacao = new Movimentacao();
+            else{
+                removeValorAntigo();
+            }
+
             String data = campoData.getText().toString();
             Double valorRecuperado = Double.parseDouble(campoValor.getText().toString());
 
@@ -70,6 +84,10 @@ public class ReceitasActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private void removeValorAntigo() {
+        receitaTotal = receitaTotal - movimentacao.getValor();
     }
 
     public Boolean validarCamposReceita(){
